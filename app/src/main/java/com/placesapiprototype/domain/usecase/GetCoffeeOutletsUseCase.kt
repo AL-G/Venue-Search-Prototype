@@ -7,7 +7,7 @@ import com.placesapiprototype.data.RequestResult
 import com.placesapiprototype.data.ResultType
 
 class GetCoffeeOutletsUseCase(
-    //private val placesRepository: RepositoryImpl
+    private val placesRepository: RepositoryImpl
      ) {
 
 //    suspend fun execute(): RequestResult<ResponseBase> {
