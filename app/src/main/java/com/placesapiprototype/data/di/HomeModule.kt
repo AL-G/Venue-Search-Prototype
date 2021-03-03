@@ -1,7 +1,5 @@
 package com.placesapiprototype.data.di
 
-import com.google.gson.Gson
-import com.google.gson.GsonBuilder
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.placesapiprototype.data.RepositoryImpl
 import com.placesapiprototype.data.remote.FoursquarePlacesApiService
@@ -13,7 +11,7 @@ import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-val homeModule = module {
+val mainModule = module {
 
     single { provideRetrofitInstance() }
 
@@ -39,5 +37,3 @@ private fun provideRetrofitInstance(): Retrofit = Retrofit.Builder()
 
 private fun providePlacesApiService(retrofit: Retrofit): FoursquarePlacesApiService =
     retrofit.create(FoursquarePlacesApiService::class.java)
-
-private fun provideGson(): Gson = GsonBuilder().setPrettyPrinting().create()

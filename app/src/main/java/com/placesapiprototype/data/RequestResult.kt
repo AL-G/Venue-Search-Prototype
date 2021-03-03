@@ -1,7 +1,6 @@
 package com.placesapiprototype.data
 
 import ResponseBase
-import java.lang.Exception
 
 data class RequestResult<out T>(
     var resultType: ResultType,
@@ -11,7 +10,7 @@ data class RequestResult<out T>(
 
     companion object {
         fun <T> success(data: T?): RequestResult<T> {
-            return RequestResult(ResultType.SUCCESS,data)
+            return RequestResult(ResultType.SUCCESS, data)
         }
 
         fun <T> error(error: Exception? = null): RequestResult<ResponseBase> {

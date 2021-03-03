@@ -1,7 +1,7 @@
 package com.placesapiprototype
 
 import android.app.Application
-import com.placesapiprototype.data.di.homeModule
+import com.placesapiprototype.data.di.mainModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
@@ -18,7 +18,7 @@ class BaseApplication : Application() {
             androidContext(this@BaseApplication)
             modules(
                 listOf(
-                    homeModule
+                    mainModule
                 )
             )
         }

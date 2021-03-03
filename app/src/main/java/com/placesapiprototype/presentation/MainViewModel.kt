@@ -21,49 +21,26 @@ class MainViewModel (
     private val searchCoffeeOutletsUseCase: GetCoffeeOutletsUseCase
 ) : ViewModel() {
 
-//    private val searchCoffeeOutletsUseCase = GetCoffeeOutletsUseCase(
-//        RepositoryImpl(
-//            RemoteDataSource(
-//                providePlacesApiService()
-//        )))
-    var coffeeOutlets: MutableLiveData<String>? = MutableLiveData()
-
+    var coffeeOutlets: MutableLiveData<RequestResult<ResponseBase>>? = MutableLiveData()
 
     init {
-        coffeeOutlets?.value = "100"
-        //refreshLocalCoffeeOutlets()
+        refreshLocalCoffeeOutlets()
     }
 
     fun refreshLocalCoffeeOutlets() {
+
         //isLoadingLiveData(true)
-//        viewModelScope.launch {
-//            val coffeeOutletResult: RequestResult<ResponseBase> = searchCoffeeOutletsUseCase.execute()
-//            if (coffeeOutletResult.resultType == ResultType.SUCCESS) {
-//            coffeeOutlets?.value = "1"
-//            } else {
-//            coffeeOutlets?.value = "0"
-//            }
-//        }
+        viewModelScope.launch {
+            val coffeeOutletResult: RequestResult<ResponseBase> = searchCoffeeOutletsUseCase.execute()
+            if (coffeeOutletResult.resultType == ResultType.SUCCESS) {
+                coffeeOutlets?.value = coffeeOutletResult
+                //isLoadingLiveData(false)
+            } else {
+                coffeeOutlets?.value = coffeeOutletResult
+                //isLoadingLiveData(false)
+            }
+        }
+
     }
-
-    fun providePlacesApiService(): FoursquarePlacesApiService {
-        val interceptor = HttpLoggingInterceptor()
-        interceptor.apply { interceptor.level = HttpLoggingInterceptor.Level.BODY }
-        val client = OkHttpClient.Builder()
-            .addInterceptor(interceptor)
-            .build()
-
-        return Retrofit.Builder()
-            .addConverterFactory(GsonConverterFactory.create())
-            .baseUrl("https://api.foursquare.com/")
-            .client(client)
-            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-            .build().create(FoursquarePlacesApiService::class.java)
-    }
-
-    fun refresh(value: Int){
-        coffeeOutlets?.value = coffeeOutlets?.value?.plus(6)
-    }
-
 
 }
