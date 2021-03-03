@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">PlacesApiPrototype</string>
+    <string name="app_name">Where is the coffee?</string>
+    <string name="distance">Distance: %s metres</string>
 </resources>

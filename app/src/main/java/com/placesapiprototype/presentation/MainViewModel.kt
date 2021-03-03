@@ -1,45 +1,56 @@
 package com.placesapiprototype.presentation
 
-import ResponseBase
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.placesapiprototype.data.RepositoryImpl
 import com.placesapiprototype.data.RequestResult
 import com.placesapiprototype.data.ResultType
-import com.placesapiprototype.data.remote.FoursquarePlacesApiService
-import com.placesapiprototype.data.remote.RemoteDataSource
+import com.placesapiprototype.data.model.Items
+import com.placesapiprototype.data.model.ResponseBase
 import com.placesapiprototype.domain.usecase.GetCoffeeOutletsUseCase
 import kotlinx.coroutines.launch
-import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
-import retrofit2.Retrofit
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
-import retrofit2.converter.gson.GsonConverterFactory
 
-class MainViewModel (
+class MainViewModel(
     private val searchCoffeeOutletsUseCase: GetCoffeeOutletsUseCase
 ) : ViewModel() {
 
-    var coffeeOutlets: MutableLiveData<RequestResult<ResponseBase>>? = MutableLiveData()
+    var isLoading: MutableLiveData<Boolean>? = MutableLiveData<Boolean>()
+    var coffeeOutlets: MutableLiveData<List<Items>>? = MutableLiveData()
+    private var errorMessages: MutableLiveData<String>? = MutableLiveData<String>()
+
+    var lat: Double = 0.0
+    var long: Double = 0.0
 
     init {
+        isLoading?.value = true
+        getLatitudeAndLongitude()
         refreshLocalCoffeeOutlets()
     }
 
-    fun refreshLocalCoffeeOutlets() {
+    private fun refreshLocalCoffeeOutlets() {
 
-        //isLoadingLiveData(true)
+        isLoading?.value = true
         viewModelScope.launch {
-            val coffeeOutletResult: RequestResult<ResponseBase> = searchCoffeeOutletsUseCase.execute()
+            val coffeeOutletResult: RequestResult<ResponseBase> =
+                searchCoffeeOutletsUseCase.execute()
             if (coffeeOutletResult.resultType == ResultType.SUCCESS) {
-                coffeeOutlets?.value = coffeeOutletResult
-                //isLoadingLiveData(false)
+
+                val venueList =
+                    coffeeOutletResult.data?.response?.groups?.get(0)?.items as MutableList<Items>
+
+                // reorder venues into ascending order by distance
+                fun selector(i: Items): Int = i.venue.location.distance
+                venueList.sortBy { selector(it) }
+                coffeeOutlets?.value = venueList
+                isLoading?.value = false
             } else {
-                coffeeOutlets?.value = coffeeOutletResult
-                //isLoadingLiveData(false)
+                errorMessages?.value = coffeeOutletResult.error?.localizedMessage
+                isLoading?.value = false
             }
         }
+    }
+
+    fun getLatitudeAndLongitude() {
 
     }
 

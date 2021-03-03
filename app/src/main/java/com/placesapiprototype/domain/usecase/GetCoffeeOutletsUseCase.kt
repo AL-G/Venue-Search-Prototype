@@ -1,8 +1,8 @@
 package com.placesapiprototype.domain.usecase
 
-import ResponseBase
 import com.placesapiprototype.data.RepositoryImpl
 import com.placesapiprototype.data.RequestResult
+import com.placesapiprototype.data.model.ResponseBase
 
 class GetCoffeeOutletsUseCase(
     private val placesRepository: RepositoryImpl

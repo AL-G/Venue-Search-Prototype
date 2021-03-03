@@ -1,6 +1,7 @@
 package com.placesapiprototype.data
 
-import ResponseBase
+import com.placesapiprototype.data.model.ResponseBase
+
 
 data class RequestResult<out T>(
     var resultType: ResultType,

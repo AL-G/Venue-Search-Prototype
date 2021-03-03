@@ -1,6 +1,7 @@
 package com.placesapiprototype.data.remote
 
-import ResponseBase
+
+import com.placesapiprototype.data.model.ResponseBase
 import retrofit2.http.GET
 import retrofit2.http.Query
 

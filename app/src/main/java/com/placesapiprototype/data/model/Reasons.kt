@@ -1,11 +1,11 @@
+package com.placesapiprototype.data.model
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class Groups (
+data class Reasons (
 
-	@SerializedName("type") val type : String,
-	@SerializedName("name") val name : String,
+	@SerializedName("count") val count : Int,
 	@SerializedName("items") val items : List<Items>
 ) : Parcelable

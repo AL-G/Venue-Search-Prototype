@@ -1,8 +1,9 @@
 package com.placesapiprototype.data.remote
 
-import ResponseBase
+
 import com.google.gson.Gson
 import com.placesapiprototype.data.RequestResult
+import com.placesapiprototype.data.model.ResponseBase
 
 
 class RemoteDataSource(private val foursquarePlacesApiService: FoursquarePlacesApiService) {

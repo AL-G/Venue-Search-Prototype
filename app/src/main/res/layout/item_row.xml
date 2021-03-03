@@ -1,22 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
         <variable
             name="venue"
-            type="com.placesapiprototype.data.RequestResult.Companion" />
+            type="com.placesapiprototype.data.model.Venue" />
 
     </data>
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/artistCardView"
+        android:id="@+id/venueCardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_margin="@dimen/padding_medium"
         android:elevation="@dimen/medium_elevation"
+        android:backgroundTint="@color/secondaryColor"
         android:innerRadius="0dp"
         android:shape="ring"
         android:thicknessRatio="1.9"
@@ -27,24 +29,69 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/padding_large">
 
-            <ImageView
-                android:id="@+id/albumImage"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
+            <androidx.cardview.widget.CardView
+                android:id="@+id/venueIconCardView"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                app:cardCornerRadius="64dp"
+                app:cardElevation="@dimen/medium_elevation"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                >
+
+                <ImageView
+                    android:id="@+id/venueIcon"
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:background="@color/primaryDarkColor"
+                    android:scaleType="centerCrop" />
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/venueName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/padding_large"
+                android:text="@{venue.name}"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="@color/primaryTextColor"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/venueIconCardView"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/albumName"
+                android:id="@+id/venueAddress"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/padding_medium"
-                android:text="NAME"
+                android:layout_marginLeft="@dimen/padding_large"
+                android:text="@{venue.location.address}"
+                android:textColor="@color/primaryTextColor"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/venueIconCardView"
+                app:layout_constraintTop_toBottomOf="@+id/venueName" />
+
+            <TextView
+                android:id="@+id/venueDistance"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/padding_large"
+                android:text="@{String.format(@string/distance, venue.location.distance)}"
+                android:textColor="@color/primaryTextColor"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/venueIconCardView"
+                app:layout_constraintTop_toBottomOf="@+id/venueAddress" />
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/chipGroup"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/padding_large"
+                android:layout_marginBottom="0dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/albumImage"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintStart_toEndOf="@+id/venueIconCardView"
+                app:layout_constraintTop_toBottomOf="@+id/venueDistance" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
