@@ -17,13 +17,11 @@ import com.placesapiprototype.data.model.Venue
 import com.placesapiprototype.databinding.ItemRowBinding
 import com.squareup.picasso.Picasso
 
-class OutletRecyclerViewAdapter(var context: Context?) :
+class OutletRecyclerViewAdapter(private var context: Context?) :
 
     RecyclerView.Adapter<OutletRecyclerViewAdapter.ViewHolder>() {
-
-    lateinit var items: List<Items>
-
-    val iconDimensions = 64
+    private var items: List<Items> = emptyList()
+    private val iconDimensions = 64
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -66,7 +64,6 @@ class OutletRecyclerViewAdapter(var context: Context?) :
                     .into(holder.venueIcon)
             }
         }
-
     }
 
     override fun getItemCount(): Int {

@@ -23,9 +23,7 @@ val mainModule = module {
     }
     factory { GetCoffeeOutletsUseCase(placesRepository = get()) }
     viewModel {
-        MainViewModel(
-            searchCoffeeOutletsUseCase = get()
-        )
+        MainViewModel(searchCoffeeOutletsUseCase = get())
     }
 }
 

@@ -8,7 +8,7 @@ class RepositoryImpl(
     private val remoteDataSource: RemoteDataSource
 ) : Repository {
 
-    override suspend fun getLocalCoffeeOutlete(): RequestResult<ResponseBase>? {
+    override suspend fun getLocalCoffeeOutlete(): RequestResult<ResponseBase> {
 
         var result: RequestResult<ResponseBase>
 

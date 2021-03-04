@@ -8,14 +8,11 @@ class GetCoffeeOutletsUseCase(
     private val placesRepository: RepositoryImpl
 ) {
 
-        suspend fun execute(): RequestResult<ResponseBase> {
-
+    suspend fun execute(): RequestResult<ResponseBase> {
         lateinit var outlets: RequestResult<ResponseBase>
-
-        placesRepository.getLocalCoffeeOutlete()?.let { placesEntity ->
+        placesRepository.getLocalCoffeeOutlete().let { placesEntity ->
             outlets = placesEntity
         }
-
         return outlets
     }
 

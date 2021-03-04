@@ -17,17 +17,14 @@ class MainViewModel(
     var isLoading: MutableLiveData<Boolean>? = MutableLiveData<Boolean>()
     var coffeeOutlets: MutableLiveData<List<Items>>? = MutableLiveData()
     private var errorMessages: MutableLiveData<String>? = MutableLiveData<String>()
-
-    var lat: Double = 0.0
-    var long: Double = 0.0
+    var lat: String = ""
+    var long: String = ""
 
     init {
         isLoading?.value = true
-        getLatitudeAndLongitude()
-        refreshLocalCoffeeOutlets()
     }
 
-    private fun refreshLocalCoffeeOutlets() {
+    fun refreshLocalCoffeeOutlets() {
 
         isLoading?.value = true
         viewModelScope.launch {
@@ -50,8 +47,5 @@ class MainViewModel(
         }
     }
 
-    fun getLatitudeAndLongitude() {
-
-    }
 
 }
