@@ -10,9 +10,11 @@ class GetCoffeeOutletsUseCase(
 
     suspend fun execute(lat: String, long: String): RequestResult<ResponseBase> {
         lateinit var outlets: RequestResult<ResponseBase>
-        placesRepository.getLocalCoffeeOutlete("""${lat},${long}""").let { placesEntity ->
+        placesRepository.getLocalCoffeeOutlets("""${lat},${long}""").let { placesEntity ->
             if (placesEntity != null) {
                 outlets = placesEntity
+            } else {
+                outlets = RequestResult.error<Exception>(Exception(placesEntity?.error?.message))
             }
         }
         return outlets
