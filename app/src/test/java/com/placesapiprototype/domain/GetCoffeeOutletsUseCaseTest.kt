@@ -16,32 +16,33 @@ class GetCoffeeOutletsUseCaseTest {
     private val getCoffeeOutletsUseCase = GetCoffeeOutletsUseCase(mockRepository)
 
     @Test
-    fun verifyBusinessErrorWhenRepoMockReturnNetworkError() {
-        runBlocking {
-            given(mockRepository.getLocalCoffeeOutlets(""))
-                .willReturn(RequestResult.error<Exception>(Exception("Generic exception")))
-
-            val expectedResult = RequestResult.error<Exception>(Exception()).error
-            val realResult = getCoffeeOutletsUseCase.execute("", "").error
-
-            Assert.assertEquals(expectedResult is Exception, realResult is Exception)
-        }
-    }
-
-    @Test
     fun verifyResultWhenRepoMockReturnSuccessState() {
         runBlocking {
             val result = RequestResult.success(Util.getDummyResponseBase())
             val base = RequestResult.success(result)
 
-            given(mockRepository.getLocalCoffeeOutlets("")).willReturn(base.data)
+            given(mockRepository.getLocalCoffeeOutlets("1,2")).willReturn(base.data)
 
-            val expectedResult = RequestResult.success(base.data)
-            val realResult = getCoffeeOutletsUseCase.execute("", "")
+            val realResult = getCoffeeOutletsUseCase.execute("1", "2")
 
-            Assert.assertEquals(expectedResult, realResult)
+            Assert.assertEquals(result, realResult)
         }
     }
+
+    @Test
+    fun verifyBusinessErrorWhenRepoMockReturnNetworkError() {
+        runBlocking {
+            given(mockRepository.getLocalCoffeeOutlets("1,2"))
+                .willReturn(RequestResult.error<Exception>(Exception("There was a problem")))
+
+            val expectedResult = RequestResult.error<Exception>(Exception("There was a problem")).error
+            val realResult = getCoffeeOutletsUseCase.execute("1", "2").error
+
+            Assert.assertEquals(expectedResult is Exception, realResult is Exception)
+        }
+    }
+
+
 
 
 }
