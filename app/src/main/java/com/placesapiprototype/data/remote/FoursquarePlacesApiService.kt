@@ -7,7 +7,7 @@ import retrofit2.http.Query
 
 interface FoursquarePlacesApiService {
 
-    @GET("venues/explore?v=${BuildConfig.API_VERSION}&client_id=${BuildConfig.CLIENT_ID}&client_secret=${BuildConfig.CLIENT_SECRET}")
+    @GET("venues/explore?section=coffee&v=${BuildConfig.API_VERSION}&client_id=${BuildConfig.CLIENT_ID}&client_secret=${BuildConfig.CLIENT_SECRET}")
     suspend fun searchLocalCoffeeOutlets(@Query("ll") ll: String): ResponseBase
 
 }
