@@ -16,7 +16,7 @@ class MainViewModel(
 
     var isLoading: MutableLiveData<Boolean>? = MutableLiveData<Boolean>()
     var coffeeOutlets: MutableLiveData<List<Items>>? = MutableLiveData()
-    private var errorMessages: MutableLiveData<String>? = MutableLiveData<String>()
+    var errorMessages: MutableLiveData<String>? = MutableLiveData<String>()
     var lat: String = ""
     var long: String = ""
 

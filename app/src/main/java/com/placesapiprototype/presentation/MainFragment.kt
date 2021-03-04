@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -38,6 +39,9 @@ class MainFragment : Fragment() {
         // observe the venues live data in the view model
         viewModel.coffeeOutlets?.observe(this.viewLifecycleOwner, outletsObserver)
 
+        // observe any error messages and show a toast message
+        viewModel.errorMessages?.observe(this.viewLifecycleOwner, errorObserver)
+
         return root
     }
 
@@ -69,4 +73,13 @@ class MainFragment : Fragment() {
             }
         }
     }
+
+    private var errorObserver: Observer<String> =
+        Observer<String> { t ->
+            Toast.makeText(
+                context,
+                t,
+                Toast.LENGTH_LONG
+            )
+        }
 }
