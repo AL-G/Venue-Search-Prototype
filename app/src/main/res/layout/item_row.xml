@@ -33,7 +33,7 @@
                 android:id="@+id/venueIconCardView"
                 android:layout_width="56dp"
                 android:layout_height="56dp"
-                app:cardCornerRadius="64dp"
+                app:cardCornerRadius="25dp"
                 app:cardElevation="@dimen/medium_elevation"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -44,8 +44,7 @@
                     android:id="@+id/venueIcon"
                     android:layout_width="56dp"
                     android:layout_height="56dp"
-                    android:background="@color/primaryDarkColor"
-                    android:scaleType="centerCrop" />
+                    android:background="@color/primaryDarkColor" />
             </androidx.cardview.widget.CardView>
 
             <TextView
@@ -53,6 +52,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/padding_large"
+                android:textStyle="bold"
                 android:text="@{venue.name}"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:textColor="@color/primaryTextColor"

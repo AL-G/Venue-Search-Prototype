@@ -8,9 +8,9 @@ class GetCoffeeOutletsUseCase(
     private val placesRepository: RepositoryImpl
 ) {
 
-    suspend fun execute(): RequestResult<ResponseBase> {
+    suspend fun execute(lat: String, long: String): RequestResult<ResponseBase> {
         lateinit var outlets: RequestResult<ResponseBase>
-        placesRepository.getLocalCoffeeOutlete().let { placesEntity ->
+        placesRepository.getLocalCoffeeOutlete("""${lat},${long}""").let { placesEntity ->
             outlets = placesEntity
         }
         return outlets

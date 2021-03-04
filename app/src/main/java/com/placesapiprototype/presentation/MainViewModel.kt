@@ -29,7 +29,7 @@ class MainViewModel(
         isLoading?.value = true
         viewModelScope.launch {
             val coffeeOutletResult: RequestResult<ResponseBase> =
-                searchCoffeeOutletsUseCase.execute()
+                searchCoffeeOutletsUseCase.execute(lat, long)
             if (coffeeOutletResult.resultType == ResultType.SUCCESS) {
 
                 val venueList =

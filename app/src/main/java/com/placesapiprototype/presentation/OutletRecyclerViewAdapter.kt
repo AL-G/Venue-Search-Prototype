@@ -59,8 +59,6 @@ class OutletRecyclerViewAdapter(private var context: Context?) :
             if (category.primary) {
                 Picasso.get()
                     .load("""${category.icon.prefix}${iconDimensions}${category.icon.suffix}""")
-                    .resize(56, 56)
-                    .centerCrop()
                     .into(holder.venueIcon)
             }
         }

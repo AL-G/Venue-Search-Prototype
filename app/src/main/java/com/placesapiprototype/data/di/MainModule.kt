@@ -1,6 +1,7 @@
 package com.placesapiprototype.data.di
 
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
+import com.placesapiprototype.BuildConfig
 import com.placesapiprototype.data.RepositoryImpl
 import com.placesapiprototype.data.remote.FoursquarePlacesApiService
 import com.placesapiprototype.data.remote.RemoteDataSource
@@ -27,11 +28,12 @@ val mainModule = module {
     }
 }
 
-private fun provideRetrofitInstance(): Retrofit = Retrofit.Builder()
-    .baseUrl("https://api.foursquare.com/v2/")
-    .addConverterFactory(GsonConverterFactory.create())
-    .addCallAdapterFactory(CoroutineCallAdapterFactory())
-    .build()
+private fun provideRetrofitInstance(): Retrofit =
+    Retrofit.Builder()
+        .baseUrl(BuildConfig.API_BASE_URL)
+        .addConverterFactory(GsonConverterFactory.create())
+        .addCallAdapterFactory(CoroutineCallAdapterFactory())
+        .build()
 
 private fun providePlacesApiService(retrofit: Retrofit): FoursquarePlacesApiService =
     retrofit.create(FoursquarePlacesApiService::class.java)
