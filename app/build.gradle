@@ -20,8 +20,8 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         buildConfigField "String", "API_BASE_URL", "\"https://api.foursquare.com/v2/\""
         buildConfigField "String", "API_VERSION", "\"20210301\""
-        buildConfigField "String", "CLIENT_ID", "\"BQQV2LZUS1EFCY4L4CTPFTTBUSELBH3BWCMWBL4ZXCMSGBF5\""
-        buildConfigField "String", "CLIENT_SECRET", "\"C0QLU5VRPBAKITYOHJIVS1VQYD0NWAJMGOHDZ5CYDZM0VMZN\""
+        buildConfigField "String", "CLIENT_ID", "\"YOUR_CLIENT_ID\""
+        buildConfigField "String", "CLIENT_SECRET", "\"YOUR_CLIENT_SECRET\""
     }
 
     buildTypes {
